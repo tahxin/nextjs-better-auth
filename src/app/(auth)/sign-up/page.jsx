@@ -31,15 +31,11 @@ const SignUpPage = () => {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
 
-      console.log("Data from the form data:", data);
-
       const { data: resData, error } = await signUp.email({
         name: data.name,
         email: data.email,
         password: data.password,
       });
-
-      console.log("Response from signUp.email:", resData, error);
 
       if (error) {
         setErrorMsg(error.message || "Failed to create account. Please try again.");
@@ -60,7 +56,7 @@ const SignUpPage = () => {
   return (
     <div className="flex min-h-[calc(100vh-100px)] flex-col items-center justify-center p-4">
       <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Create an account</h2>
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Create an account</h1>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Enter your details below to create your account
         </p>
@@ -148,7 +144,7 @@ const SignUpPage = () => {
 
         <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
           Already have an account?{" "}
-          <Link href="/sign-in" className="font-semibold text-primary underline underline-offset-4 hover:opacity-80">
+          <Link href="/sign-in" className="font-semibold text-accent underline underline-offset-4 hover:opacity-80">
             Sign in
           </Link>
         </p>
