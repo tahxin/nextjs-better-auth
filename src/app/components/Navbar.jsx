@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { Link, Button } from "@heroui/react";
 import NextLink from "next/link";
+import { useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { data: session } = useSession();
+  console.log("User Session holo:", session);
 
   const NavLinks = (
     <>
@@ -22,6 +26,24 @@ export default function Navbar() {
       </li>
     </>
   );
+
+  const authLinks = <>
+
+  {
+    session?.user ? <>
+    <p>{session?.user?.email}</p>
+    <Button asChild>
+      <NextLink href="/sign-out">Sign Out</NextLink>
+    </Button>
+      </> : <>
+     <NextLink href="/sign-in" className="text-sm font-medium hover:opacity-80 transition-opacity">Login</NextLink>
+          <Button asChild>
+            <NextLink href="/sign-up">Sign Up</NextLink>
+          </Button></>
+  }
+  
+  
+  </>
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
